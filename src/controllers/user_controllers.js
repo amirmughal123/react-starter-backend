@@ -1,12 +1,23 @@
 import User from '../models/users';
+import bcrypt from 'bcrypt';
+import bcryptSaltRounds from '../../config';
 
 export default {
 
-  create: (req, res, next) => {
-    User.create(req.body, (err, doc) => {
-      if (err) next(err);
-      else res.send(doc);
-    })
+  create: async(req, res, next) => {
+    try {
+      const { SALT_ROUNDS } = bcryptSaltRounds.bcrypt;
+
+      req.body.password = await bcrypt.hash(req.body.password, SALT_ROUNDS);
+
+      const data = await User.create(req.body);
+
+      if(!data) return res.send({ status: false, msg: 'User not created, something went wrong' });
+      else return res.send({ status: true, msg: 'User created successfully', data });
+
+    } catch(err) {
+      return res.send({ status: false, msg: err.message });
+    }
   },
 
   getAll: (req, res, next) => {
