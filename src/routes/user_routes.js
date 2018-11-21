@@ -5,7 +5,7 @@ const router = express.Router(); //-- creating router
 //============================= BASE CALLS
 router.route('/')
     // POST /tests
-    // .post( test_controller.create )
+    .post( userController.create )
     // GET /tests
     .get( userController.getAll );
 
