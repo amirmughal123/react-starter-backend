@@ -4,18 +4,21 @@ const router = express.Router(); //-- creating router
 
 //============================= BASE CALLS
 router.route('/')
-    // POST /tests
+    // POST /users registration
     .post( userController.create )
-    // GET /tests
+    // GET /users
     .get( userController.getAll );
 
-//============================= BASE CALLS
-router.route('/:id')
-    // PUT /tests/:id
-    // .put( test_controller.update )
-    // DELETE /tests/:id
-    // .delete( test_controller.delete )
-    // GET /tests/:id
-    // .get( test_controller.getById );
+//-============== BASE CALLS
+
+router.route('/login')
+    //POST /login
+    .post( userController.login);
+
+// ============== BASE CALLS
+
+router.route('/reset-password')
+    //POST /reset-password
+    .post( userController.resetPassword );
 
 export default router;
