@@ -1,6 +1,7 @@
 import User from '../models/users';
 import bcrypt from 'bcrypt';
 import bcryptSaltRounds from '../../config';
+import jwt from 'jsonwebtoken';
 
 const create = async(req, res, next) => {
   try {
